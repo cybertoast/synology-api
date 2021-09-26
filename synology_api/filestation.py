@@ -480,6 +480,9 @@ class FileStation:
         api_name = 'SYNO.FileStation.Upload'
         info = self.file_station_list[api_name]
         api_path = info['path']
+        # The synology API expects the 'path' parameter without a trailing slash
+        if dest_path.endswith("/"): 
+            dest_path = dest_path[:-1]
         filename = os.path.basename(file_path)
 
         session = requests.session()
